@@ -11,6 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//get all articles
+Route::get('/', "ArticlesController@index");
+//show a article
+//Route::get('/', "ArticlesController@show");
+//create form for a new article
+//Route::get('/article/new', "ArticlesController@create");
+//create a new article
+//Route::get('/', "ArticlesController@store");
+//delete a article
+//Route::get('/', "ArticlesController@destroy");
+//edit form for a article
+//Route::get('/', "ArticlesController@edit");
+//edit a article
+//Route::get('/', "ArticlesController@update");
+
+
+//login
+
+//register
