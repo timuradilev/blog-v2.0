@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Article;
+use App\Http\Requests\CreateArticleRequest;
 
 class ArticlesController extends Controller
 {
@@ -13,8 +16,9 @@ class ArticlesController extends Controller
      */
     public function index()
     {
+        $articles = Article::latest()->get();
         //get all articles
-        return view("pages.index");
+        return view("pages.index")->with('articles', $articles);
     }
     
     /**
@@ -33,9 +37,13 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateArticleRequest $req)
     {
-        //save article and redirect to /
+        $article = $req->all();
+        $article['authoruid'] = Auth::id();
+        Article::create($article);
+        
+        return redirect('/');
     }
 
     /**
@@ -46,7 +54,12 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        return view("pages.article");
+        $article = Article::findOrFail($id);
+        
+        if(is_null($article))
+            abort(404);
+        
+        return view("pages.article", compact('article'));
     }
 
     /**

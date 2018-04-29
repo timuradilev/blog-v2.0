@@ -13,20 +13,21 @@
 
 //get all articles
 Route::get('/', "ArticlesController@index");
-//show a article
-//Route::get('/', "ArticlesController@show");
 //create form for a new article
-//Route::get('/article/new', "ArticlesController@create");
-//create a new article
-//Route::get('/', "ArticlesController@store");
+Route::get('/article/new', "ArticlesController@create");
+//show an article
+Route::get('/article/{id}', "ArticlesController@show");
+//store a new article
+Route::post('/article', "ArticlesController@store");
+//the edit form for a article
+Route::get('/article/{id}/edit', "ArticlesController@edit");
+//store an edited article
+Route::match(['put', 'patch'], '/article/{id}', "ArticlesController@update");
 //delete a article
-//Route::get('/', "ArticlesController@destroy");
-//edit form for a article
-//Route::get('/', "ArticlesController@edit");
-//edit a article
-//Route::get('/', "ArticlesController@update");
+Route::delete('/article/{id}', "ArticlesController@destroy");
 
 
-//login
 
-//register
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

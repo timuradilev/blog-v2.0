@@ -1,0 +1,19 @@
+hr {
+	margin-top: 0;
+}
+.article_title_link {
+	color: black;
+}
+.article_title_link:hover {
+	text-decoration: none;
+}
+.error_page {
+	max-width: 420px;
+	margin: 200px auto 30px;
+	padding: 0 11px;
+}
+@media (min-width: 800px) {
+    .container{
+        max-width: 800px;
+    }
+}
