@@ -9,7 +9,6 @@
 @include('components.full_header')
 <div class="container">
     
-
     @foreach ($articles as $art)
     <h4><a class="article_title_link" href='{{ action('ArticlesController@show', [$art->id]) }}'>{{ $art->title }}</a></h4>
 
@@ -19,5 +18,6 @@
     <p>{{ $art->content }}</p>
     <hr> <br />
     @endforeach
-    
+
+</div>
 @stop

@@ -1,25 +1,29 @@
 <div class="container">
-	<div class="row align-items-center mt-3 mb-3">
-		<div class="col-sm-4">
+	<div class="d-flex mt-3 mb-3">
+		<div class="mr-auto">
 			<a class="h4" href="/">Блог</a>
 		</div>
 		@if (Auth::check())
-		<div class="col-sm-5">
-			<!--<a class="btn btn-info" href="newarticle.php?action=random">Random</a> -->
-			<a class="btn btn-dark" href="{!! action('ArticlesController@create') !!}">Написать</a>
-		</div>
-		<div class="col-sm-3">
-			<span class="h4 btn">{{ Auth::user()->name }}</span>
+                    <a class="btn btn-secondary mr-3" href="{!! action('ArticlesController@makeRandomArticle') !!}">Random</a>
+                    <a class="btn btn-secondary mr-3" href="{!! action('ArticlesController@create') !!}">Написать</a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                        {{ Auth::user()->name }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{!! action('ArticlesController@showUsersArticles', [Auth::id()]) !!}">Публикации</a>
+                        <a class="dropdown-item" href="{!! action('CommentsController@showUsersComments', [Auth::id()]) !!}">Комментарии</a>
+                        <div class="dropdown-divider"></div>
                         <form action="{!! action('Auth\LoginController@logout') !!}" method="post" class="d-inline">
                             @csrf
-                            <button class="btn btn-warning float-right">Выйти</button>
+                            <button class="dropdown-item btn btn-link">Выйти</button>
                         </form>
-		</div>
+                    </div>
+                </div>
 		@else
-		<div class="col-sm-8">
-			<a class="btn btn-dark float-right" href="{!! action('Auth\RegisterController@showRegistrationForm') !!}">Регистрация</a>
-			<a class="btn btn-info float-right mr-2" href="{!! action('Auth\LoginController@showLoginForm') !!}">Войти</a>
-		</div>
+                <a class="btn btn-dark float-right" href="{!! action('Auth\RegisterController@showRegistrationForm') !!}">Регистрация</a>
+                <a class="btn btn-info float-right ml-3" href="{!! action('Auth\LoginController@showLoginForm') !!}">Войти</a>
 		@endif
 	</div>
 </div>
