@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Article;
 use App\Http\Requests\CreateArticleRequest;
+use App\User;
 
 class ArticlesController extends Controller
 {
@@ -113,5 +114,20 @@ class ArticlesController extends Controller
         Article::create($article);
         
         return redirect('/');
+    }
+    
+    /**
+     * Show the user's articles
+     * 
+     * @return Illuminate\Http\Response
+     */
+    public function showUsersArticles(Request $request, $userId)
+    {
+        $user = User::find($userId);
+        
+        $articles = $user->articles()->latest()->get();
+        
+        return view('pages.usersarticles')
+                ->with(['articles' => $articles, 'userId' => $userId, 'userName' => $user->name, 'action' => 'showArticles']);
     }
 }

@@ -12,7 +12,7 @@
                         {{ Auth::user()->name }}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{!! action('ArticlesController@showUsersArticles', [Auth::id()]) !!}">Публикации</a>
+                        <a class="dropdown-item" href="{!! action('ArticlesController@showUsersArticles', [Auth::id()]) !!}">Статьи</a>
                         <a class="dropdown-item" href="{!! action('CommentsController@showUsersComments', [Auth::id()]) !!}">Комментарии</a>
                         <div class="dropdown-divider"></div>
                         <form action="{!! action('Auth\LoginController@logout') !!}" method="post" class="d-inline">
