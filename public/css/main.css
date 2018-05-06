@@ -27,6 +27,12 @@ hr {
     margin: 200px auto 30px;
     padding: 0 11px;
 }
+.login-register-form {
+    background-color: #e1e5ec;
+}
+.input-group-text {
+    background-color: #beddff;
+}
 @media (min-width: 800px) {
     .container{
         max-width: 800px;
