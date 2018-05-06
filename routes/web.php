@@ -34,5 +34,3 @@ Route::get('/user/{id}', 'ArticlesController@showUsersArticles');
 Route::get('/user/{id}/comments', 'CommentsController@showUsersComments');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

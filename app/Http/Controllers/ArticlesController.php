@@ -35,13 +35,14 @@ class ArticlesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $req
+     * @param  \App\Http\Requests\CreateArticleRequest  $req
      * @return \Illuminate\Http\Response
      */
     public function store(CreateArticleRequest $req)
     {
         $article = $req->all();
         $article['authoruid'] = Auth::id();
+        $article['author'] = Auth::user()->name;
         Article::create($article);
         
         return redirect('/');
@@ -71,19 +72,24 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        return view("pages.edit");
+        $article = Article::findOrFail($id);
+        
+        return view("pages.edit")->with('article', $article);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\CreateArticleRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateArticleRequest $request, $id)
     {
-        //update and redirect to /
+        $article = Article::findOrFail($id);
+        $article->update($request->all());
+        
+        return redirect('/');
     }
 
     /**
@@ -94,7 +100,9 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //delete and redirect to /
+        Article::destroy($id);
+        
+        return redirect('/');
     }
     
     /**
@@ -110,6 +118,7 @@ class ArticlesController extends Controller
         $article['title'] = $loremIpsum[0];
         $article['content'] = $loremIpsum[2];
         $article['authoruid'] = Auth::id();
+        $article['author'] = Auth::user()->name;
         
         Article::create($article);
         
