@@ -31,6 +31,6 @@ Route::delete('/article/{id}', "ArticlesController@destroy");
 //show user's articles
 Route::get('/user/{id}', 'ArticlesController@showUsersArticles');
 //show user's comments
-//Route::get('/user/{id}/comments', 'CommentsController@showUsersComments');
+Route::get('/user/{id}/comments', 'CommentsController@showUsersComments');
 
 Auth::routes();

@@ -11,6 +11,16 @@ use App\User;
 class ArticlesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show', 'showUsersArticles']);
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -132,11 +142,11 @@ class ArticlesController extends Controller
      */
     public function showUsersArticles(Request $request, $userId)
     {
-        $user = User::find($userId);
+        $user = User::findOrFail($userId);
         
         $articles = $user->articles()->latest()->get();
         
         return view('pages.usersarticles')
-                ->with(['articles' => $articles, 'userId' => $userId, 'userName' => $user->name, 'action' => 'showArticles']);
+            ->with(['articles' => $articles, 'userId' => $userId, 'userName' => $user->name, 'action' => 'showArticles']);
     }
 }
