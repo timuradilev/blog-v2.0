@@ -6,14 +6,14 @@
 
         <h3>Пользователь <a class="user-name" href="{!! action('ArticlesController@showUsersArticles', [$userId]) !!}">{{ $userName }}</a></h3>
 
-        <div class="h4 d-inline">
+        <div class="h5 d-inline">
             <a class="menu-link text-uppercase font-weight-bold
                 @if ($action == 'showArticles')
                     menu-link-active
                 @endif
                " href="{!! action('ArticlesController@showUsersArticles', [$userId]) !!}">Статьи</a>
         </div> 
-        <div class="h4 d-inline">
+        <div class="h5 d-inline">
             <a class="menu-link text-uppercase font-weight-bold
                @if ($action == 'showComments')
                     menu-link-active

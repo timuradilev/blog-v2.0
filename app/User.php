@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -28,12 +29,36 @@ class User extends Authenticatable
     ];
     
     /**
-     * Get all the user's articles
+     * Get all user's articles
      * 
      * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function articles()
     {
         return $this->hasMany('App\Article', 'authoruid');
+    }
+    
+    /**
+     * Get all user's comments
+     * 
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+    
+    /**
+     * Get all user's comments with filled article's titles.
+     * 
+     * @return Illuminate\Support\Collection
+     */
+    public function latestCommentsWithFullArticlesTitles()
+    {
+        return DB::table('comments')->where('user_id', '=', $this->id)
+                ->join('articles', 'articles.id', '=', 'comments.article_id')
+                ->select('comments.content', 'comments.created_at', 'comments.author', 'comments.article_id', 'articles.title')
+                ->latest()
+                ->get();
     }
 }

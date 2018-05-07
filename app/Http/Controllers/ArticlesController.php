@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Article;
 use App\Http\Requests\CreateArticleRequest;
 use App\User;
+use App\Comment;
 
 class ArticlesController extends Controller
 {
@@ -67,11 +68,9 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = Article::findOrFail($id);
+        $comments[] = Comment::first(); 
         
-        if(is_null($article))
-            abort(404);
-        
-        return view("pages.article", compact('article'));
+        return view("pages.article", compact('article', 'comments'));
     }
 
     /**

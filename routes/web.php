@@ -34,3 +34,10 @@ Route::get('/user/{id}', 'ArticlesController@showUsersArticles');
 Route::get('/user/{id}/comments', 'CommentsController@showUsersComments');
 
 Auth::routes();
+
+//API. Get article's comments by AJAX
+Route::get('/article/{id}/comments', "CommentsController@getAllForTheArticle");
+
+Route::get('/test', function() {
+    return 'Hello, World!';
+    });

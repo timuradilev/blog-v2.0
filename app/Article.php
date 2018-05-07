@@ -12,4 +12,14 @@ class Article extends Model
       'authoruid',
       'author'
     ];
+    
+    /**
+     * Get the comments an article has
+     * 
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

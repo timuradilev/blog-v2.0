@@ -8,6 +8,37 @@ hr {
 .article_title_link:hover {
     text-decoration: none;
 }
+.article_title {
+    color: #444;
+}
+.comments_header {
+    margin-bottom: 10px;
+}
+.comments_header_title {
+    color: #444;
+    border-bottom: 1px solid #e3e3e3;
+}
+.comments_header_count {
+    color: #669dd8;
+    font-weight: bold;
+}
+.comment {
+    margin-top: 20px;
+}
+.comment_head {
+    color: #a1a1a1;
+    font-size: 90%;
+}
+.comment_content {
+    margin-top: 5px;
+    line-height: 1.46;
+}
+.comment_posted_where {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #a1a1a1;
+    font-size: 90%;
+}
 .menu-link {
     text-decoration: none;
     color: gray;
