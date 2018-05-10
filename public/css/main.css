@@ -4,18 +4,24 @@ hr {
 .article_title_link {
     text-decoration: none;
     color: #444;
+    font-weight: 600;
+    font-size: 30px;
 }
 .article_title_link:hover {
     text-decoration: none;
 }
 .article_title {
     color: #444;
+    font-weight: 600;
+    font-size: 30px;
 }
 .comments_header {
     margin-bottom: 10px;
 }
 .comments_header_title {
     color: #444;
+    font-size: 22px;
+    font-weight: 500;
     border-bottom: 1px solid #e3e3e3;
 }
 .comments_header_count {
@@ -29,6 +35,10 @@ hr {
     color: #a1a1a1;
     font-size: 90%;
 }
+.comment_user_link {
+    color: #669dd8;
+    font-size: 90%;
+}
 .comment_content {
     margin-top: 5px;
     line-height: 1.46;
@@ -38,6 +48,38 @@ hr {
     margin-bottom: 5px;
     color: #a1a1a1;
     font-size: 90%;
+}
+.comment_footer {
+    margin-top: 5px;
+}
+.comment_reply_link {
+    color: #669dd8;
+    font-size: 80%;
+}
+.comment_reply_form {
+    margin-top: 10px;
+}
+.comment_form {
+    margin-top: 30px;
+}
+.comment_form_title_text {
+    color: #444;
+    font-size: 22px;
+    font-weight: 500;
+}
+.comment_form_title {
+    margin-bottom: 10px;
+}
+.comment_form_content {
+    background-color: #f7f7f7;
+    padding: 20px 20px 20px;
+}
+.comment_form_error {
+    display: none;
+    margin-top: 10px;
+}
+.comments_nested {
+    margin-left: 20px;
 }
 .menu-link {
     text-decoration: none;

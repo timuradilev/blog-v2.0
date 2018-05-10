@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Article;
+use App\Comment;
 
 class CommentsController extends Controller
 {
@@ -20,7 +22,7 @@ class CommentsController extends Controller
     /**
      * Show the user's comments
      * 
-     * @return Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function showUsersComments($userId)
     {
@@ -39,8 +41,27 @@ class CommentsController extends Controller
     public function getAllForTheArticle($articleId)
     {
         $article = Article::findOrFail($articleId);
-        $comments = $article->comments()->get();
+        $comments = $article->comments()->oldest()->get();
         
         return $comments;
+    }
+    /**
+     * Store a new comment to the article
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param int $articleId
+     * @return JSON with status
+     */
+    public function store(Request $request, $articleId)
+    {
+        $this->validate($request, ['content' => 'required|max:1000']);
+        $comment = Comment::create([
+            'content' => $request->input('content'),
+            'parent_id' => $request->input('parent_id'),
+            'article_id' => $articleId,
+            'user_id' => Auth::id(),
+            'author' => Auth::user()->name]);
+        
+        return $comment;
     }
 }

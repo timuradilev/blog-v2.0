@@ -109,7 +109,9 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        Article::destroy($id);
+        $article = Article::findOrFail($id);
+        $article->comments()->delete();
+        $article->delete();
         
         return redirect('/');
     }

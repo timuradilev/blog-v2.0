@@ -10,6 +10,7 @@ class Comment extends Model
       'content',
       'article_id',
       'user_id',
-      'author'
+      'author',
+      'parent_id'
     ];
 }
