@@ -4,14 +4,14 @@
     @include('components.full_header')
     <div class="container">
 
-        <h3>Пользователь <a class="user-name" href="{!! action('ArticlesController@showUsersArticles', [$userId]) !!}">{{ $userName }}</a></h3>
+        <h3>Пользователь <a class="user-name" href="{!! route('user.profile', [$userId]) !!}">{{ $userName }}</a></h3>
 
         <div class="h5 d-inline">
             <a class="menu-link text-uppercase font-weight-bold
                 @if ($action == 'showArticles')
                     menu-link-active
                 @endif
-               " href="{!! action('ArticlesController@showUsersArticles', [$userId]) !!}">Статьи</a>
+               " href="{!! route('user.profile', [$userId]) !!}">Статьи</a>
         </div> 
         <div class="h5 d-inline">
             <a class="menu-link text-uppercase font-weight-bold

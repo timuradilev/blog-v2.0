@@ -26,10 +26,13 @@ class ArticlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($pageNumber = 1)
     {
-        $articles = Article::latest()->get();
-        //get all articles
+        $pageNumber = (int)$pageNumber; // make sure the pageNumber is integer
+        $articles = Article::latest()->paginate(10, ['*'], 'page', $pageNumber); // second and third arguments is just for to fill the parameters
+        if($pageNumber > $articles->lastPage())
+            abort(404);
+            
         return view("pages.index")->with('articles', $articles);
     }
     
@@ -141,11 +144,14 @@ class ArticlesController extends Controller
      * 
      * @return Illuminate\Http\Response
      */
-    public function showUsersArticles(Request $request, $userId)
+    public function showUsersArticles($userId, $pageNumber = 1)
     {
         $user = User::findOrFail($userId);
         
-        $articles = $user->articles()->latest()->get();
+        $pageNumber = (int)$pageNumber; // make sure the pageNumber is integer
+        $articles = $user->articles()->latest()->paginate(10, ['*'], 'page', $pageNumber); // second and third arguments is just for to fill the parameters
+        if($pageNumber > $articles->lastPage())
+            abort(404);
         
         return view('pages.usersarticles')
             ->with(['articles' => $articles, 'userId' => $userId, 'userName' => $user->name, 'action' => 'showArticles']);

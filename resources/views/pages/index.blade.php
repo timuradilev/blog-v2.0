@@ -8,8 +8,8 @@
 
 @include('components.full_header')
 <div class="container">
-    
-@include('components.showarticles')
-
+    @include('components.showarticles')
+    {{ $articles->links('components.pagination', ['prefix' => '']) }}
 </div>
+{{--@include('components.pagination') --}}
 @stop
