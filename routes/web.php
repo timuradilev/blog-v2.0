@@ -45,7 +45,3 @@ Auth::routes();
 
 //API. Get article's comments by AJAX
 Route::get('/article/{id}/comments', "CommentsController@getAllForTheArticle");
-
-Route::get('/test', function() {
-    return 'Hello, World!';
-    });

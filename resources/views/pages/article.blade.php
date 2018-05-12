@@ -8,7 +8,7 @@
 @include('components.full_header')
 <div class="container">
     <h4 class="article_title">{{ $article->title }}</h4>
-    <h6 class="text-secondary">Автор статьи <a href="{{ action('ArticlesController@showUsersArticles', [$article->authoruid]) }}">{{ $article->author }}</a>. Создал в {{ $article->created_at }}</h6>
+    <h6 class="text-secondary">Автор статьи <a href="{{ route('user.profile', [$article->authoruid]) }}">{{ $article->author }}</a>. Создал в {{ $article->created_at }}</h6>
     <br>
     <p>{{ $article->content }}</p>
     @if($article->authoruid == Auth::id())

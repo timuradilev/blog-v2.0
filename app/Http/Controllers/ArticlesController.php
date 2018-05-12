@@ -19,6 +19,7 @@ class ArticlesController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show', 'showUsersArticles']);
+        $this->middleware('author')->only(['edit', 'update', 'destroy']);
     }
     
     /**
