@@ -67,6 +67,13 @@ hr {
     font-size: 22px;
     font-weight: 500;
 }
+.comment_form_title_text_link {
+    color: #548eaa;
+    font-size: 22px;
+    font-weight: 500;
+    border-bottom: 1px solid;
+    cursor: pointer;
+}
 .comment_form_title {
     margin-bottom: 10px;
 }

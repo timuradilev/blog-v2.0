@@ -72,9 +72,8 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = Article::findOrFail($id);
-        $comments[] = Comment::first(); 
         
-        return view("pages.article", compact('article', 'comments'));
+        return view("pages.article", compact('article'));
     }
 
     /**

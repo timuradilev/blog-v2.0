@@ -54,6 +54,7 @@ class CommentsController extends Controller
      */
     public function store(Request $request, $articleId)
     {
+        $article = Article::findOrFail($articleId, ['id']); //check that this article exists
         $this->validate($request, ['content' => 'required|max:1000']);
         $comment = Comment::create([
             'content' => $request->input('content'),

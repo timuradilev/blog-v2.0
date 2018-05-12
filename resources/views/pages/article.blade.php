@@ -32,7 +32,7 @@
     @if(Auth::check())
     <div class="comment_form" id="comment_form_section">
         <div class="comment_form_title">
-            <span class="comment_form_title_text">Написать комментарий</span>
+            <span class="comment_form_title_text" onclick="resetCommentForm()">Написать комментарий</span>
         </div>
         <form class="comment_form_content" id="comment_form">
             <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -112,6 +112,8 @@
     {
         $("#comment_form_parent_id").val(commentIdToReply);
         $("#comment_form").detach().appendTo("#comment_" + commentIdToReply + " > .comment_js_placeholder");
+        $("#comment_form_section > .comment_form_title > .comment_form_title_text")
+                .removeClass('comment_form_title_text').addClass('comment_form_title_text_link');
     }
     function showComments(comments)
     {
@@ -153,6 +155,8 @@
         $("#comment_form_parent_id").val("0");
         $("#comment_content").val("");
         $("#comment_form").detach().appendTo("#comment_form_section");
+        $("#comment_form_section > .comment_form_title > .comment_form_title_text_link")
+                .removeClass('comment_form_title_text_link').addClass('comment_form_title_text');
     }
 </script>
 @stop
