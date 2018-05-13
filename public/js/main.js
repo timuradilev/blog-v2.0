@@ -13,6 +13,3 @@ function escapeHtml (string) {
     return entityMap[s];
   });
 }
-function reCAPTCHASubmitButton(token) {
-    $("#form").submit();
-}

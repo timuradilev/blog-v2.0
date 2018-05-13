@@ -5,6 +5,11 @@
 @stop
 @section('scripts')
 <script src='https://www.google.com/recaptcha/api.js'></script>
+<script>
+    function reCAPTCHASubmitButton(token) {
+        $("#form").submit();
+    }
+</script>
 @stop
 @section('content')
 @include('components.full_header')
