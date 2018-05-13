@@ -17,10 +17,10 @@
                                 <div class="input-group-text"><i class="far fa-user"></i></div>
                         </div>
                         <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name" placeholder="" name="name" required autofocus autocomplete="off" value="{{ old('name') }}">
-                        @if($errors->has('name'))
-                        <span class="invalid-feedback">
-                            <strong>Некорректное имя</strong>
-                        </span>
+                        @if ($errors->has('name'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -31,10 +31,10 @@
                             <div class="input-group-text"><i class="far fa-envelope"></i></div>
                         </div>
                         <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email" placeholder="" name="email" autocomplete="off" required value="{{ old('email') }}">
-                        @if($errors->has('email'))
-                        <span class="invalid-feedback">
-                            <strong>Некорректный адрес почты</strong>
-                        </span>
+                        @if ($errors->has('email'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
                         @endif
                         <small><em>Упрощенная регистрация. Почта не проверяется на принадлежность вам.</em></small>
                     </div>
@@ -46,10 +46,10 @@
                             <div class="input-group-text"><i class="fas fa-unlock"></i></div>
                         </div>
                         <input type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" id="password" placeholder="" name="password" autocomplete="off" required>
-                        @if($errors->has('password'))
-                        <span class="invalid-feedback">
-                            <strong>Некорретный пароль</strong>
-                        </span>
+                        @if ($errors->has('password'))
+                            <span class="invalid-feedback">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
                         @endif
                     </div>
                 </div>

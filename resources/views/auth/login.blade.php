@@ -38,10 +38,10 @@
                     <a class="btn btn-link" href="{!! route('password.request') !!}">Забыли пароль?</a>
                 </div>
             </form>
-            @if($errors->has('email') || $errors->has('password'))
-            <div class="invalid-feedback" style="display: block">
-                <strong>Неправильный пользователь или пароль</strong>
-            </div>
+            @if ($errors->has('email') || $errors->has('password'))
+            <span class="invalid-feedback mb-3 d-block">
+                <strong>@lang('auth.failed')</strong>
+            </span>
             @endif
         </div>
     </div>

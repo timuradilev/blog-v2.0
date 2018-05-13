@@ -14,7 +14,7 @@
             </div>
             <div class="comment_posted_where">
                 <span>Опубликован: </span>
-                <a href="{{ action('ArticlesController@show', [$comment->article_id]) }}">{{ $comment->title }}</a>
+                <a href="{{ action('ArticlesController@show', [$comment->article_id, $comment->slug]) }}">{{ $comment->title }}</a>
             </div>
         </div>
         <hr>

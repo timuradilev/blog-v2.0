@@ -22,7 +22,7 @@
                     </div>
                 </div>
 		@else
-                <a class="btn btn-dark float-right" href="{!! action('Auth\RegisterController@showRegistrationForm') !!}">Регистрация</a>
+                <a class="btn btn-warning float-right" href="{!! action('Auth\RegisterController@showRegistrationForm') !!}">Регистрация</a>
                 <a class="btn btn-info float-right ml-3" href="{!! action('Auth\LoginController@showLoginForm') !!}">Войти</a>
 		@endif
 	</div>

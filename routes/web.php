@@ -19,8 +19,6 @@ Route::get('/page{id}', 'ArticlesController@index');
 Route::get('/article/new', "ArticlesController@create");
 //make a random article
 Route::get('/article/random', 'ArticlesController@makeRandomArticle');
-//show an article
-Route::get('/article/{id}', "ArticlesController@show");
 //store a new article
 Route::post('/article', "ArticlesController@store");
 //the edit form for a article
@@ -45,3 +43,6 @@ Auth::routes();
 
 //API. Get article's comments by AJAX
 Route::get('/article/{id}/comments', "CommentsController@getAllForTheArticle");
+
+//show an article
+Route::get('/article/{id}/{slug}', "ArticlesController@show");

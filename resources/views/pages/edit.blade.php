@@ -13,20 +13,31 @@
         @csrf
         <div class="form-group">
             <label for="title">Заголовок</label>
-            <input type="text" name="title" id="title" class="form-control" value="{{ $article->title }}" autofocus autocomplete="off" required>
+            <input type="text" name="title" id="title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{ $article->title }}" autofocus autocomplete="off" required>
+            @if($errors->has('title'))
+            <ul class="invalid-feedback">
+                @foreach ($errors->get('title') as $message)
+                    @if ($message === 'The format is invalid.')
+                        <li><strong>@lang('messages.title')</li></strong>
+                    @else
+                        <li><strong>{{ $message }}</strong></li>
+                    @endif
+                @endforeach
+            </ul>
+            @endif
         </div>
         <div class="form-group">
             <label for="content">Текст</label>
-            <textarea name="content" class="form-control" id="content" rows="15" required>{{ $article->content }}</textarea>
+            <textarea name="content" class="form-control {{ $errors->has('content') ? 'is-invalid' : '' }}" id="content" rows="15" required>{{ $article->content }}</textarea>
+            @if($errors->has('content'))
+            <ul class="invalid-feedback">
+                @foreach ($errors->get('content') as $message)
+                    <li><strong>{{ $message }}</strong></li>
+                @endforeach
+            </ul>
+            @endif
         </div>
         <button type="submit" class="btn btn-success">Сохранить</button>
     </form>
-    @if ($errors->any())
-    <ul class="alert alert-danger">
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-    @endif
 </div>
 @stop

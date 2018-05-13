@@ -24,7 +24,8 @@ class CreateArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:3'
+            'title' => 'min:3|max:100|regex:/^[\d\w\p{P} ]+$/u',
+            'content' => 'min:5|max:5000'
         ];
     }
 }

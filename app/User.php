@@ -55,10 +55,15 @@ class User extends Authenticatable
      */
     public function latestCommentsWithFullArticlesTitles()
     {
-        return DB::table('comments')->where('user_id', '=', $this->id)
+        $comments = DB::table('comments')->where('user_id', '=', $this->id)
                 ->join('articles', 'articles.id', '=', 'comments.article_id')
                 ->select('comments.content', 'comments.created_at', 'comments.author', 'comments.article_id', 'articles.title')
                 ->latest()
                 ->get();
+        foreach($comments as &$comment) {
+            $comment->slug = str_slug($comment->title, '-');
+        }
+        
+        return $comments;
     }
 }
