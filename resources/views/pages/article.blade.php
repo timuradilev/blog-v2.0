@@ -63,7 +63,7 @@
             $(".comment_form_send_error").css('display', 'none');
             var content = $.trim($("#comment_content").val());
             var articleId = $("#comment_form_article_id").val();
-            var url = "/article/" + articleId + "/comment";
+            var url = "/article/" + articleId + "/comments";
             var parent_id = $("#comment_form_parent_id").val();
             $("#comment_submit").prop('disabled', true);
             $.ajax({
@@ -82,6 +82,8 @@
                 $("#comments_count").text(parseInt($("#comments_count").text()) + 1);
             }).fail(function(){
                 $("#comment_form_error").css('display', 'block');
+                if($("#comment_content").val() !== "")
+                    $("#comment_submit").prop('disabled', false);
             });
         });
         //get and show all comments

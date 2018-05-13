@@ -3,12 +3,14 @@
 @section('title')
 Создать статью
 @stop
-
+@section('scripts')
+<script src='https://www.google.com/recaptcha/api.js'></script>
+@stop
 @section('content')
 @include('components.full_header')
 <div class="container">
     <h4>Разместить статью</h4>
-    <form action="{!! action('ArticlesController@store') !!}" method="POST">
+    <form action="{!! action('ArticlesController@store') !!}" method="POST" id="form">
         @csrf
         <div class="form-group">
             <label for="title">Заголовок</label>
@@ -36,7 +38,10 @@
             </ul>
             @endif
         </div>
-        <button type="submit" class="btn btn-success">Опубликровть</button>
+        <button type="submit" class="btn btn-success g-recaptcha" data-sitekey="{{ env('SETTINGS_GOOGLE_RECAPTCHA_SITE_KEY') }}" data-callback='reCAPTCHASubmitButton'>Опубликовать</button>
+        @if ($errors->has('recaptcha'))
+            <div class="text-danger d-inline">{{ $errors->first('recaptcha') }}</div>
+        @endif
     </form>
 </div>
 @stop

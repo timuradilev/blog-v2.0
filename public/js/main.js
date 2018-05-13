@@ -8,9 +8,11 @@ var entityMap = {
   '`': '&#x60;',
   '=': '&#x3D;'
 };
-
 function escapeHtml (string) {
   return String(string).replace(/[&<>"'`=\/]/g, function (s) {
     return entityMap[s];
   });
+}
+function reCAPTCHASubmitButton(token) {
+    $("#form").submit();
 }

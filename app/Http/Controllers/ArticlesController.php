@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Article;
 use App\Http\Requests\CreateArticleRequest;
 use App\User;
-use App\Comment;
 
 class ArticlesController extends Controller
 {
@@ -20,6 +19,7 @@ class ArticlesController extends Controller
     {
         $this->middleware('auth')->except(['index', 'show', 'showUsersArticles']);
         $this->middleware('author')->only(['edit', 'update', 'destroy']);
+        $this->middleware('recaptcha')->only(['store']);
     }
     
     /**

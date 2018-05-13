@@ -36,12 +36,12 @@ Route::get('/user/{id}/page{n}', 'ArticlesController@showUsersArticles');
 //show user's comments
 Route::get('/user/{id}/comments', 'CommentsController@showUsersComments');
 //store a new comment
-Route::post('/article/{id}/comment', 'CommentsController@store');
+Route::post('/article/{id}/comments', 'CommentsController@store');
 
 
 Auth::routes();
 
-//API. Get article's comments by AJAX
+//Get article's comments by AJAX
 Route::get('/article/{id}/comments', "CommentsController@getAllForTheArticle");
 
 //show an article
