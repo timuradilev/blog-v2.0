@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Article extends Model
 {
@@ -31,5 +32,17 @@ class Article extends Model
     public function getSlugAttribute()
     {
         return str_slug($this->attributes['title'], '-');
+    }
+    /**
+     * Get a created_at date.
+     * 
+     * @return string
+     */
+    public function getCreatedAtAttribute($created_at)
+    {
+        $created = new Carbon($created_at, config('app.timezone'));
+        Carbon::setLocale(config('app.locale'));
+        $created->setTimezone('Europe/Moscow');
+        return (string)$created->diffForHumans();
     }
 }
