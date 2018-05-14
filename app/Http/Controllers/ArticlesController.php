@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Article;
 use App\Http\Requests\CreateArticleRequest;
 use App\User;
@@ -113,8 +114,10 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
-        $article->comments()->delete();
-        $article->delete();
+        DB::transaction(function() use($article) {
+            $article->comments()->delete();
+            $article->delete();
+        });
         
         return redirect('/');
     }
@@ -127,7 +130,7 @@ class ArticlesController extends Controller
      */
     public function makeRandomArticle()
     {
-        $loremIpsum = array_map("strip_tags", file("http://loripsum.net/api/1/short/headers", FILE_IGNORE_NEW_LINES));
+        $loremIpsum = array_map("strip_tags", file("http://loripsum.net/api/1/long/headers", FILE_IGNORE_NEW_LINES));
         
         $article['title'] = $loremIpsum[0];
         $article['content'] = $loremIpsum[2];

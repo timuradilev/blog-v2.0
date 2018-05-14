@@ -50,7 +50,7 @@ class CommentsController extends Controller
      * 
      * @param \Illuminate\Http\Request $request
      * @param int $articleId
-     * @return JSON with status
+     * @return comment in JSON
      */
     public function store(Request $request, $articleId)
     {
