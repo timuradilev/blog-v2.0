@@ -13,3 +13,16 @@ function escapeHtml (string) {
     return entityMap[s];
   });
 }
+$(function() {
+    //show search input form in navbar
+  $("#search-button").click(function() {
+    $("#search-form").removeClass().addClass("search-form_expanded");
+    $("#full_header-navbar-items > .nav-item").addClass("d-none");
+  });
+  //remove search input form from navbar
+  $("#search-button-close").click(function(event) {
+    event.preventDefault();
+    $("#search-form").removeClass().addClass("search-form");
+    $("#full_header-navbar-items > .nav-item").removeClass("d-none");
+  });
+});

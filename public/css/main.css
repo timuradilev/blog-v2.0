@@ -113,6 +113,36 @@ hr {
 .input-group-text {
     background-color: #beddff;
 }
+.btn-search {
+  color: #17a2b8;
+  margin-right: 1rem!important;
+}
+.search-form-navbar {
+  width: 100%!important;
+}
+.search-form {
+  display: none;
+  margin-right: 1rem!important;
+}
+.search-form_expanded {
+  display: inline;
+  flex: 1 1 0%;
+  margin-right: 1rem!important;
+}
+#full_header-navbar-items .dropdown-menu {
+    background-color: #17a2b8;
+}
+#full_header-navbar-items .dropdown-item {
+    color: white;
+}
+#full_header-navbar-items .dropdown-item:hover {
+    color: white;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+#full_header-navbar-items .dropdown-divider {
+    border-top-color: black;
+}
 @media (min-width: 800px) {
     .container{
         max-width: 800px;
