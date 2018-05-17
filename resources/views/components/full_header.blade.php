@@ -6,14 +6,14 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form action="{{ action('SearchController@show') }}" class="mr-3 search-form" id="search-form">
+            <form action="{{ route('search') }}" class="mr-3 search-form" id="search-form">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <span class="btn btn-info btn-disabled"><i class="fas fa-search"></i></span>
                     </div>
                     <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Поиск" name="q">
                     <div class="input-group-append">
-                        <span class="input-group-text btn btn-outline-secondary" id="search-button-close"><i class="fas fa-times"></i></span>
+                        <span class="btn btn-info" id="search-button-close"><i class="fas fa-times"></i></span>
                     </div>
                     <button type="submit" class="btn btn-info d-none">Поиск</button>
                 </div>

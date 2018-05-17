@@ -15,6 +15,14 @@ hr {
     font-weight: 600;
     font-size: 30px;
 }
+.btn-disabled {
+    cursor: auto !important;
+}
+.btn-disabled:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
 .comments_header {
     margin-bottom: 10px;
 }

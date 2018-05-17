@@ -46,5 +46,7 @@ Route::get('/article/{id}/comments', "CommentsController@getAllForTheArticle");
 //show an article
 Route::get('/article/{id}/{slug}', "ArticlesController@show");
 
-//search page
-Route::get('/search/', 'SearchController@show');
+//search page. first page
+Route::get('/search/', 'SearchController@show')->name('search');
+//search page. page N
+Route::get('/search/page{id}', 'SearchController@show');

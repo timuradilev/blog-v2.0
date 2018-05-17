@@ -6,5 +6,5 @@
 
 @section('u_content')
     @include('components.showarticles')
-    {{ $articles->links('components.pagination', ['prefix' => '/user/'.$userId]) }}
+    {{ $articles->links('components.pagination', ['prefix' => 'user/'.$userId.'/', 'postfix' => '']) }}
 @endsection

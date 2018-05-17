@@ -31,7 +31,7 @@ class ArticlesController extends Controller
     public function index($pageNumber = 1)
     {
         $pageNumber = (int)$pageNumber; // make sure the pageNumber is integer
-        $articles = Article::latest()->paginate(10, ['*'], 'page', $pageNumber); // second and third arguments is just for to fill the parameters
+        $articles = Article::latest()->paginate(10, ['*'], 'page', $pageNumber); // second and third arguments is just to fill the parameters
         if($pageNumber > $articles->lastPage())
             abort(404);
             
@@ -152,7 +152,7 @@ class ArticlesController extends Controller
         $user = User::findOrFail($userId);
         
         $pageNumber = (int)$pageNumber; // make sure the pageNumber is integer
-        $articles = $user->articles()->latest()->paginate(10, ['*'], 'page', $pageNumber); // second and third arguments is just for to fill the parameters
+        $articles = $user->articles()->latest()->paginate(10, ['*'], 'page', $pageNumber); // second and third arguments is just to fill the parameters
         if($pageNumber > $articles->lastPage())
             abort(404);
         
