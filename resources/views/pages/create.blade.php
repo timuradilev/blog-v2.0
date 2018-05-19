@@ -43,6 +43,22 @@
             </ul>
             @endif
         </div>
+        <div class="form-group">
+            <label for="tags">Метки</label>
+            <input type="text" name="tags" id="tags" class="form-control {{ $errors->has('tags') ? 'is-invalid' : '' }}" placeholder="Метки" value="{{ old('tags') }}" autocomplete="off" aria-describedby="tagsHelp">
+            <small id="tagsHelp" class="form-text text-muted">Введите метки через запятую.</small>
+            @if($errors->has('tags'))
+            <ul class="invalid-feedback">
+                @foreach ($errors->get('tags') as $message)
+                    @if ($message === 'The format is invalid.')
+                        <li><strong>@lang('messages.title')</li></strong>
+                    @else
+                        <li><strong>{{ $message }}</strong></li>
+                    @endif
+                @endforeach
+            </ul>
+            @endif
+        </div>
         <button type="submit" class="btn btn-success g-recaptcha" data-sitekey="{{ env('SETTINGS_GOOGLE_RECAPTCHA_SITE_KEY') }}" data-callback='reCAPTCHASubmitButton'>Опубликовать</button>
         @if ($errors->has('recaptcha'))
             <div class="text-danger d-inline">{{ $errors->first('recaptcha') }}</div>

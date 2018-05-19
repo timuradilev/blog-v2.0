@@ -16,13 +16,31 @@ class Article extends Model
     
     protected $appends = ['slug'];
     /**
-     * Get the comments an article has
+     * Get the article's comments
      * 
      * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function comments()
     {
         return $this->hasMany('App\Comment');
+    }
+    /**
+     * Get the article's tags
+     * 
+     * @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->hasManyThrough('App\Tag', 'App\Articletag', 'article_id', 'id', 'id', 'tag_id');
+    }
+    /**
+     * Get the entries in articletags table that belongs to this article.
+     * 
+     * @return Illuminate\Database\Eloquent\Relations\HasMane
+     */
+    public function tagsBonds()
+    {
+        return $this->hasMany('App\Articletag');
     }
     /**
      * Get a slug for the title.
@@ -44,5 +62,19 @@ class Article extends Model
         Carbon::setLocale(config('app.locale'));
         $created->setTimezone('Europe/Moscow');
         return (string)$created->diffForHumans();
+    }
+    /**
+     * Get articles on the given page that have given words in the title and the content columns
+     * 
+     * @param string $query
+     * @param int $pageNumber
+     * @return Illuminate\Pagination\LengthAwarePaginator
+     */
+    public static function hasWords($query, $pageNumber = 1)
+    {
+        return Article::where('title', 'like', "%$query%")
+                        ->orWhereRaw('match(content) against (?)', [$query])
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(10, ['*'], 'page', $pageNumber);
     }
 }

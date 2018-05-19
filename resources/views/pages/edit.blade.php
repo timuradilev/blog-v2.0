@@ -37,6 +37,10 @@
             </ul>
             @endif
         </div>
+        <div class="form-group">
+            <label for="tags">Метки</label>
+            <input type="text" id="tags" class="form-control" value="{{ $tags }}" autocomplete="off" readonly>
+        </div>
         <button type="submit" class="btn btn-success">Сохранить</button>
     </form>
 </div>

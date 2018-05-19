@@ -7,22 +7,31 @@
 @section('content')
 @include('components.full_header')
 <div class="container">
-    <h4 class="article_title">{{ $article->title }}</h4>
-    <h6 class="text-secondary">Автор статьи <a href="{{ route('user.profile', [$article->authoruid]) }}">{{ $article->author }}</a>. Создал {{ $article->created_at }}</h6>
-    <br>
-    <p>{{ $article->content }}</p>
-    @if($article->authoruid == Auth::id())
-    <div>
-        <a class="btn btn-outline-secondary" href="{!! action('ArticlesController@edit', [$article->id]) !!}">Редактировать</a>
-        <form action="{!! action('ArticlesController@destroy', [$article->id]) !!}" method="post" class="d-inline">
-            @method('DELETE')
-            @csrf
-            <button class="btn btn-outline-danger">Удалить</button>
-        </form>
-    </div>
-    <br>
-    @endif
-    <hr>
+    <article class="article">
+        <h4 class="article_title">{{ $article->title }}</h4>
+        <h6 class="text-secondary">Автор статьи <a href="{{ route('user.profile', [$article->authoruid]) }}">{{ $article->author }}</a>. Создал {{ $article->created_at }}</h6>
+        <br>
+        <p class="article_content">{{ $article->content }}</p>
+        <div class="article_tags">
+            <span class=""><strong>Метки: </strong></span>
+            <ul class="list-unstyled d-inline">
+                @foreach ($tags as $tag)
+                    <li class="d-inline article_tags_links"><a href="{{ route('search')."/?q=".$tag->asQuery }}">{{ $tag->title }}</a></li>
+                @endforeach
+            </ul>
+        </div>
+        @if($article->authoruid == Auth::id())
+        <div class="article-buttons">
+            <a class="btn btn-outline-secondary" href="{!! action('ArticlesController@edit', [$article->id]) !!}">Редактировать</a>
+            <form action="{!! action('ArticlesController@destroy', [$article->id]) !!}" method="post" class="d-inline">
+                @method('DELETE')
+                @csrf
+                <button class="btn btn-outline-danger">Удалить</button>
+            </form>
+        </div>
+        @endif
+        <hr>
+    </article>
     <div class="comments_section" id="comments">
         <header class="comments_header">
             <span class="h5 comments_header_title">Комментарии <span class="comments_header_count" id="comments_count"></span></span>
@@ -93,8 +102,12 @@
             showComments(comments);
         });
     });
-    function convertCommentToHtml(comment)
+    function convertCommentToHtml(comment, reply = false)
     {
+        var replyButton = reply ? 
+                            ('<a class="comment_reply_link" href="#reply" onclick="showReplyForm(' + comment.id + ')">Ответить</a>')
+                            : '';
+        
         return '<div class="comment"' +
                         'id="comment_' + comment.id + '">' +
                     '<div class="comment_head">' +
@@ -105,7 +118,7 @@
                         escapeHtml(comment.content) + 
                     '</div>' +
                     '<div class="comment_footer">' +
-                        '<a class="comment_reply_link" href="#reply" onclick="showReplyForm(' + comment.id + ')">Ответить</a>' +
+                    replyButton + 
                     '</div>' +
                     '<div class="comment_reply_form comment_js_placeholder"></div>' +
                    '</div>';
@@ -130,7 +143,7 @@
         var replies = source.filter(com => com.parent_id === parentId);
         var comment_nestedClass = nestedLevel <= 10 ? "comments_nested" : "";
         $.each(replies, function(index, comment) {
-            result += convertCommentToHtml(comment);
+            result += convertCommentToHtml(comment, $("#comment_form_section").length);
             result += '<ul class="comments_list list-unstyled ' + comment_nestedClass + '" ' +
                 'id="comments_list_parent_' + comment.id + '" ' +
                 'data-nested-level="' + (nestedLevel + 1) + '">';
@@ -141,7 +154,7 @@
     }
     function showNewComment(comment)
     {
-        var htmlComment = convertCommentToHtml(comment);
+        var htmlComment = convertCommentToHtml(comment, true);
         var nestedLevel = parseInt($("#comments_list_parent_" + comment.parent_id).attr('data-nested-level'));
         var comment_nestedClass = nestedLevel <= 10 ? "comments_nested" : "";
         $("#comments_list_parent_" + comment.parent_id).append(htmlComment);

@@ -1,6 +1,9 @@
 hr {
     margin-top: 0;
 }
+.article {
+    margin: 30px 0px;
+}
 .article_title_link {
     text-decoration: none;
     color: #444;
@@ -14,6 +17,12 @@ hr {
     color: #444;
     font-weight: 600;
     font-size: 30px;
+}
+.article_content {
+    margin-bottom: 20px;
+}
+.article-buttons {
+    margin-bottom: 20px;
 }
 .btn-disabled {
     cursor: auto !important;
@@ -35,6 +44,15 @@ hr {
 .comments_header_count {
     color: #669dd8;
     font-weight: bold;
+}
+.article_tags {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.article_tags_links {
+    color: #548eaa;
+    font-weight: 500;
 }
 .comment {
     margin-top: 20px;

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\Article;
 use App\Http\Requests\CreateArticleRequest;
 use App\User;
+use App\Tag;
+use App\Articletag;
 
 class ArticlesController extends Controller
 {
@@ -43,7 +45,7 @@ class ArticlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $req)
     {
         return view("pages.create");
     }
@@ -56,10 +58,13 @@ class ArticlesController extends Controller
      */
     public function store(CreateArticleRequest $req)
     {
+        //save article
         $article = $req->all();
         $article['authoruid'] = Auth::id();
         $article['author'] = Auth::user()->name;
-        Article::create($article);
+        $newArticle = Article::create($article);
+        //save tags
+        Tag::saveTags($req->input('tags'), $newArticle->id);
         
         return redirect('/');
     }
@@ -73,8 +78,8 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $article = Article::findOrFail($id);
-        
-        return view("pages.article", compact('article'));
+        $tags = $article->tags()->get();
+        return view("pages.article")->with(['article' => $article, 'tags' => $tags]);
     }
 
     /**
@@ -86,8 +91,12 @@ class ArticlesController extends Controller
     public function edit($id)
     {
         $article = Article::findOrFail($id);
+        $tags = $article->tags()->get();
+        $tagsTitles = [];
+        foreach($tags as $tag)
+            $tagsTitles[] = $tag->title;
         
-        return view("pages.edit")->with('article', $article);
+        return view("pages.edit")->with(['article' => $article, 'tags' => implode(', ', $tagsTitles)]);
     }
 
     /**
@@ -116,6 +125,7 @@ class ArticlesController extends Controller
         $article = Article::findOrFail($id);
         DB::transaction(function() use($article) {
             $article->comments()->delete();
+            $article->tagsBonds()->delete();
             $article->delete();
         });
         
@@ -137,7 +147,9 @@ class ArticlesController extends Controller
         $article['authoruid'] = Auth::id();
         $article['author'] = Auth::user()->name;
         
-        Article::create($article);
+        $newArticle = Article::create($article);
+        $newTag = Tag::firstOrCreate(['title' => 'random']);
+        Articletag::create(['article_id' => $newArticle->id, 'tag_id' => $newTag->id]);
         
         return redirect('/');
     }

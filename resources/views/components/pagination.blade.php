@@ -3,9 +3,9 @@
         @if ($paginator->onFirstPage())
             <li class="page-item disabled"><span class="page-link"><i class="fas fa-long-arrow-alt-left"></i></span></li>
         @elseif ($paginator->currentPage() == 2)
-            <li class="page-item"><a class="page-link" href="{{ url($prefix.$postfix) }}" rel="prev"><i class="fas fa-long-arrow-alt-left"></i></a></li>
+            <li class="page-item"><a class="page-link" href="{{ $route.$postfix }}" rel="prev"><i class="fas fa-long-arrow-alt-left"></i></a></li>
         @else
-            <li class="page-item"><a class="page-link" href="{{ url("{$prefix}page".($paginator->currentPage() - 1))."$postfix" }}" rel="prev"><i class="fas fa-long-arrow-alt-left"></i></a></li>
+            <li class="page-item"><a class="page-link" href="{{ $route."/page".($paginator->currentPage() - 1).$postfix }}" rel="prev"><i class="fas fa-long-arrow-alt-left"></i></a></li>
         @endif
         @foreach ($elements as $element)
             {{-- "Three Dots" Separator --}}
@@ -17,15 +17,15 @@
                     @if ($page == $paginator->currentPage())
                         <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
                     @elseif ($page == 1)
-                        <li class="page-item"><a class="page-link" href="{{ url($prefix.$postfix) }}" rel="first">{{ $page }}</a></li>
+                        <li class="page-item"><a class="page-link" href="{{ $route.$postfix }}" rel="first">{{ $page }}</a></li>
                     @else
-                        <li class="page-item"><a class="page-link" href="{{ url("{$prefix}page$page")."$postfix" }}">{{ $page }}</a></li>
+                        <li class="page-item"><a class="page-link" href="{{ $route."/page$page"."$postfix" }}">{{ $page }}</a></li>
                     @endif
                 @endforeach
             @endif
         @endforeach
         @if ($paginator->hasMorePages())
-            <li class="page-item"><a class="page-link" href="{{ url("{$prefix}page".($paginator->currentPage() + 1))."$postfix" }}" rel="next"><i class="fas fa-long-arrow-alt-right"></i></a></li>
+            <li class="page-item"><a class="page-link" href="{{ $route."/page".($paginator->currentPage() + 1)."$postfix" }}" rel="next"><i class="fas fa-long-arrow-alt-right"></i></a></li>
         @else
             <li class="page-item disabled"><span class="page-link"><i class="fas fa-long-arrow-alt-right"></i></span></li>
         @endif

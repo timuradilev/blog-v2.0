@@ -12,7 +12,7 @@
 */
 
 //get articles. first page
-Route::get('/', "ArticlesController@index");
+Route::get('/', "ArticlesController@index")->name('home');
 //get articles. page N
 Route::get('/page{id}', 'ArticlesController@index');
 //create form for a new article

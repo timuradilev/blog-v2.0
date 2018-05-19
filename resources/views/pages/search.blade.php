@@ -21,8 +21,9 @@
             <div class="text-secondary">
                 К сожалению, ничего не нашлось.
             </div>
+        @else
+            {{ $articles->links('components.pagination', ['route' => route('search'), 'postfix' => "?q=$q"]) }}
         @endif
-        {{ $articles->links('components.pagination', ['prefix' => 'search/', 'postfix' => "?q=$q"]) }}
     @endif
 </div>
 @stop
