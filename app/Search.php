@@ -29,7 +29,7 @@ abstract class Search
     /**
      * Determine whether a given query is search by words
      * 
-     * @param string
+     * @param string $query
      * @return boolean
      */
     public static function isSearchByWords($query)
@@ -39,7 +39,7 @@ abstract class Search
     /**
      * Determine whether a given query is search by tag
      * 
-     * @param string
+     * @param string $query
      * @return boolean
      */
     public static function isSearchByTag($query)
@@ -49,7 +49,7 @@ abstract class Search
     /**
      * Get tag's title from query
      * 
-     * @param string
+     * @param string $tag
      * @return string
      */
     public static function extractTagTitle($tag)
@@ -59,7 +59,7 @@ abstract class Search
     /**
      * Determine whether a given string is tag or not
      * 
-     * @param string
+     * @param string $str
      * @return boolean
      */
     protected static function isTag($str)

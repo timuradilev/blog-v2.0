@@ -17,6 +17,7 @@ class Comment extends Model
     /**
      * Get a created_at date.
      * 
+     * @param string $created_at
      * @return string
      */
     public function getCreatedAtAttribute($created_at)

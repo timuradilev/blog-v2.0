@@ -22,12 +22,13 @@ class CommentsController extends Controller
     /**
      * Show the user's comments
      * 
+     * @param int $userId
      * @return \Illuminate\Http\Response
      */
     public function showUsersComments($userId)
     {
         $user = User::findOrFail($userId);
-        $comments = $user->latestCommentsWithFullArticlesTitles();
+        $comments = $user->commentsWithFullArticlesTitles();
         
         return view('pages.userscomments')
             ->with(['comments' => $comments, 'userId' => $userId, 'userName' => $user->name, 'action' => 'showComments']);
@@ -36,7 +37,8 @@ class CommentsController extends Controller
     /**
      * Get the all comments for the given article
      * 
-     * @return JSON with comments
+     * @param int $articleId
+     * @return JSON
      */
     public function getAllForTheArticle($articleId)
     {
@@ -50,11 +52,11 @@ class CommentsController extends Controller
      * 
      * @param \Illuminate\Http\Request $request
      * @param int $articleId
-     * @return comment in JSON
+     * @return JSON
      */
     public function store(Request $request, $articleId)
     {
-        $article = Article::findOrFail($articleId, ['id']); //check that this article exists
+        $article = Article::findOrFail($articleId, ['id']);
         $this->validate($request, ['content' => 'required|max:1000']);
         $comment = Comment::create([
             'content' => $request->input('content'),

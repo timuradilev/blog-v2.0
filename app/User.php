@@ -53,7 +53,7 @@ class User extends Authenticatable
      * 
      * @return Illuminate\Support\Collection
      */
-    public function latestCommentsWithFullArticlesTitles()
+    public function commentsWithFullArticlesTitles()
     {
         $comments = DB::table('comments')->where('user_id', '=', $this->id)
                 ->join('articles', 'articles.id', '=', 'comments.article_id')

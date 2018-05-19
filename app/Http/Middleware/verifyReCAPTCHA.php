@@ -16,11 +16,11 @@ class verifyReCAPTCHA
      */
     public function handle($request, Closure $next)
     {
-        $remoteip = $request->server('REMOTE_ADDR');
+        $remoteIp = $request->server('REMOTE_ADDR');
         $secret   = env('SETTINGS_GOOGLE_RECAPTCHA_SECRET_KEY');
 
         $recaptcha = new ReCaptcha($secret);
-        $status = $recaptcha->verify($request->input('g-recaptcha-response'), $remoteip);
+        $status = $recaptcha->verify($request->input('g-recaptcha-response'), $remoteIp);
         if ($status->isSuccess()) {
             return $next($request);
         } else {

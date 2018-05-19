@@ -36,7 +36,7 @@ class Article extends Model
     /**
      * Get the entries in articletags table that belongs to this article.
      * 
-     * @return Illuminate\Database\Eloquent\Relations\HasMane
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function tagsBonds()
     {
@@ -54,6 +54,7 @@ class Article extends Model
     /**
      * Get a created_at date.
      * 
+     * @param string $created_at
      * @return string
      */
     public function getCreatedAtAttribute($created_at)

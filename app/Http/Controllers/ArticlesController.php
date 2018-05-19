@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Article;
@@ -28,6 +27,7 @@ class ArticlesController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param int $pageNumber
      * @return \Illuminate\Http\Response
      */
     public function index($pageNumber = 1)
@@ -45,7 +45,7 @@ class ArticlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $req)
+    public function create()
     {
         return view("pages.create");
     }
@@ -135,7 +135,6 @@ class ArticlesController extends Controller
     /**
      * Generate and store a article with a random title and a content.
      * 
-     * @param \Illuminate\Http\Reuqest $request
      * @return \Illuminate\Http\Response
      */
     public function makeRandomArticle()
@@ -157,6 +156,8 @@ class ArticlesController extends Controller
     /**
      * Show the user's articles
      * 
+     * @param int $userId
+     * @param int $pageNumber
      * @return Illuminate\Http\Response
      */
     public function showUsersArticles($userId, $pageNumber = 1)

@@ -8,14 +8,15 @@ use App\Search;
 class SearchController extends Controller
 {
     /**
-     * Show search result for given string.
+     * Show search result for given query.
      * 
      * @param \Illuminate\Http\Request
-     * @param int
+     * @param int $pageNumber
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $pageNumber = 1)
     {
+        $pageNumber = (int)$pageNumber; // make sure the pageNumber is integer
         if (empty($request->q)) {
             return view('pages.search')->with(['articles' => [], 'q' => $request->q]);
         }

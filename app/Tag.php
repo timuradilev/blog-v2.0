@@ -22,7 +22,7 @@ class Tag extends Model
     /**
      * Get articles for this tag.
      * 
-     * @return @return Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return @return Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function articles()
     {
@@ -31,7 +31,6 @@ class Tag extends Model
     /**
      * Get articles on the given page for this tag
      * 
-     * @param string tagTitle
      * @param int $pageNumber
      * @return @return Illuminate\Pagination\LengthAwarePaginator
      */
@@ -41,6 +40,10 @@ class Tag extends Model
     }
     /**
      * Save all given tags to DB
+     * 
+     * @param string $tags
+     * @param int $articleId
+     * @return void
      */
     public static function saveTags($tags, $articleId)
     {
@@ -52,6 +55,7 @@ class Tag extends Model
     /**
      * Convert string with tags to array of tags
      * 
+     * @param string $tags
      * @return array
      */
     protected static function prepareTags($tags)
