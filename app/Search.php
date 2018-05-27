@@ -64,6 +64,6 @@ abstract class Search
      */
     protected static function isTag($str)
     {
-        return $str[0] === '[' && $str[strlen($str) - 1] === ']';
+        return strlen($str) && $str[0] === '[' && $str[strlen($str) - 1] === ']';
     }
 }
